@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import useRenderCount from "./useRenderCount";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const renderCount = useRenderCount();
+    console.warn(`Render count: ${renderCount}`);
+
+    const [clicks, setClicks] = useState(0);
+    const handleClick = () => setClicks(clicks + 1);
+
+    return (
+        <div className="App">
+            <div><p>{clicks} clicks</p></div>
+            <div>
+                <button onClick={handleClick}>Click me</button>
+            </div>
+        </div>
+    );
 }
 
 export default App;

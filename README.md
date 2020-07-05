@@ -1,3 +1,31 @@
+# useRenderCount Custom React Hook
+
+A custom hook, `useRenderCount` returns the number of times its
+owning component has rendered.
+
+The hook's source:
+
+```javascript
+export default function useRenderCount() {
+    const renderCount = useRef(1)
+    useEffect(() => {
+        renderCount.current = renderCount.current + 1;
+        return (() => {
+            console.warn(`cleanup after renderCount ${renderCount.current}`);
+        });
+    });
+    return renderCount.current;
+}
+```
+
+Example of use:
+
+```javascript
+    const renderCount = useRenderCount();
+    console.warn(`Render count: ${renderCount}`);
+```
+
+-------------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
